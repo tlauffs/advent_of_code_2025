@@ -5,7 +5,7 @@ class Bank:
     def __str__(self):
         return self.batteries
 
-    def get_largest_joltage(self, number_of_turns = 2) -> str:
+    def get_largest_joltage(self, number_of_turns = 2) -> int:
         batteries = self.batteries
         remaining_pops = len(batteries) - number_of_turns
         stack = []
@@ -14,7 +14,7 @@ class Bank:
                 stack.pop()
                 remaining_pops -= 1
             stack.append(b)
-        return ''.join(stack[:number_of_turns])
+        return int(''.join(stack[:number_of_turns]))
 
 banks = []
 with open('input.txt') as f:
@@ -24,8 +24,8 @@ with open('input.txt') as f:
 result_part1 = 0
 result_part2 = 0
 for bank in banks:
-    result_part1 += int(bank.get_largest_joltage(2))
-    result_part2 += int(bank.get_largest_joltage(12))
+    result_part1 += bank.get_largest_joltage(2)
+    result_part2 += bank.get_largest_joltage(12)
 
 print("part 1:", result_part1)
 print("part 2:", result_part2)
