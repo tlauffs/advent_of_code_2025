@@ -25,17 +25,16 @@ class UnionFind:
             self.parents[x] = self.find(self.parents[x])
         return self.parents[x]
 
-    def union(self, x: int, y: int) -> None|tuple[int, int]:
+    def union(self, x: int, y: int) -> None|bool:
         x_root = self.find(x)
         y_root = self.find(y)
         if x_root == y_root:
-            return
+            return False
         self.parents[x_root] = y_root
         self.sizes[y_root] += self.sizes[x_root]
         if self.sizes[y_root] == len(self.parents):
-            return (x_root, y_root)
-        return
-
+            return True
+        return False
 
     def cluster_sizes(self) -> DefaultDict[int, int]:
         counts: DefaultDict[int,int] = defaultdict(int)
@@ -67,10 +66,10 @@ sizes = sorted(cluster_sizes.values(), reverse=True)
 
 print(f"Part 1: {sizes[0] * sizes[1] * sizes[2]}")
 
-alfter_1000 = edges[1000:]
-for dist, i, j in alfter_1000:
-    tuple = union.union(i, j)
-    if tuple:
+after_1000 = edges[1000:]
+for dist, i, j in after_1000:
+    last_connection = union.union(i, j)
+    if last_connection:
         cable_dist_needed = junctions[i].x * junctions[j].x
         print(f"Part 2: {cable_dist_needed}")
         break
