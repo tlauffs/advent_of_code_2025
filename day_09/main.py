@@ -1,5 +1,3 @@
-from collections import deque
-
 def rectangle_area(p1: tuple[int,int], p2: tuple[int,int]) -> int:
     return (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
 
@@ -29,7 +27,7 @@ def rect_is_valid(a, b, green_tiles) -> bool:
 
     for gx, gy in green_tiles:
         if min_x < gx < max_x and min_y < gy < max_y:
-            return False  
+            return False
 
     return True
 
